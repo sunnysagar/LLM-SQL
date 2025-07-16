@@ -1,8 +1,9 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from app.db.models import Message
-from app.schemas.message_schema import MessageCreate, MessageUpdate
+from app.db.models import models
+from app.db.models.message_schema import MessageCreate, MessageUpdate
 
+Message = models.Message
 async def create_message(db: AsyncSession, message: MessageCreate):
     new_message = Message(**message.dict())
     db.add(new_message)

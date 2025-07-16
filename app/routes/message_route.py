@@ -8,7 +8,7 @@ from app.crud.message_curd import (
     create_message, get_message, get_all_messages, update_message, delete_message
 )
 
-router = APIRouter(prefix="/messages", tags=["Messages"])
+router = APIRouter()
 
 # Dependency
 async def get_db():

@@ -9,14 +9,17 @@ Registers the /chat route
 """
 
 from fastapi import FastAPI
-from app.routes import chat_route
+from app.routes import chat_route, user_route, message_route
 from app.services.faiss_service import load_documents
 import asyncio
+from app.db.database import engine, Base
 
 app = FastAPI(title="LLM Chat API")
 
 # Register routes
-app.include_router(chat_route.router, prefix="/llm")
+app.include_router(chat_route.router, prefix="/llm", tags=["LLM"])
+app.include_router(user_route.router, prefix="/user", tags=["Users"])
+app.include_router(message_route.router, prefix="/message", tags=["Messages"])
 
 # from openai import OpenAI
 # client = OpenAI()
@@ -40,3 +43,10 @@ async def on_startup():
         print(f"✅ Loaded {len(docs)} documents into FAISS.")
     except FileNotFoundError:
         print("❌ 'data/docs.txt' not found. Please add some documents.")
+
+
+@app.on_event("startup")
+async def startup():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    print("✅ Tables created.")

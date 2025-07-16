@@ -4,9 +4,10 @@ from typing import List
 
 from app.db.database import async_session
 from app.db.models.user_schema import UserCreate, UserResponse, UserUpdate
-from app.crud.user_crud import create_user, get_user, get_all_users, update_user, delete_user
+from app.db.models.message_schema import MessageResponse
+from app.crud.user_crud import create_user, get_user, get_all_users, update_user, delete_user, get_messages_by_user
 
-router = APIRouter(prefix="/users", tags=["Users"])
+router = APIRouter()
 
 async def get_db():
     async with async_session() as session:
@@ -40,3 +41,10 @@ async def delete(user_id: int, db: AsyncSession = Depends(get_db)):
     if not deleted:
         raise HTTPException(status_code=404, detail="User not found")
     return {"message": "User deleted"}
+
+@router.get("/{user_id}/messages", response_model=List[MessageResponse])
+async def get_user_messages(user_id: int, db: AsyncSession = Depends(get_db)):
+    messages = await get_messages_by_user(db, user_id)
+    if not messages:
+        raise HTTPException(status_code=404, detail="No messages found for this user")
+    return messages

@@ -1,7 +1,10 @@
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.db.models import User
+from app.db.models import models
 from app.db.models.user_schema import UserCreate, UserUpdate
+
+User = models.User
+Message = models.Message
 
 async def create_user(db: AsyncSession, user: UserCreate):
     new_user = User(**user.dict())
@@ -35,3 +38,7 @@ async def delete_user(db: AsyncSession, user_id: int):
     await db.delete(user)
     await db.commit()
     return user
+
+async def get_messages_by_user(db: AsyncSession, user_id: int):
+    result = await db.execute(select(Message).where(Message.user_id == user_id))
+    return result.scalars().all()
