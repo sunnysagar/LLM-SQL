@@ -1,3 +1,7 @@
+"""
+    Model or data class for User and Message 
+"""
+
 from sqlalchemy import Column, Integer, String, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from app.db.database import Base

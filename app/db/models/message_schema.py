@@ -1,5 +1,5 @@
 """
-This script will handle teh message schema for crud opr
+This script will handle the message schema for crud opr
 """
 
 from pydantic import BaseModel

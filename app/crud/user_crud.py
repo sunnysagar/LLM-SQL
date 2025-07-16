@@ -1,3 +1,7 @@
+"""
+    This script handle the curd opr of user and get message of the particular user
+"""
+
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.models import models

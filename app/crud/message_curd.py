@@ -1,3 +1,7 @@
+"""
+    Message crud opr
+"""
+
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from app.db.models import models
