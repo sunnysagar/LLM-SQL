@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+openai
+sentence-transformers
+faiss-cpu
+python-dotenv
+anthropic
+hf_xet  # to download the model fast
+sqlalchemy 
+aiosqlite 
+asyncpg

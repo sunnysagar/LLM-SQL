@@ -1,0 +1,4 @@
+FastAPI is a modern Python web framework for building APIs.
+FAISS is a library for efficient similarity search and clustering of dense vectors.
+OpenAI provides powerful LLM APIs like GPT-4.
+You can use SentenceTransformers to convert text into vector embeddings.
