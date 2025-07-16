@@ -1,11 +1,12 @@
 """
     This file:
 
-Starts the FastAPI app
+    Starts the FastAPI app
 
-Loads documents into FAISS when the app starts
+    Loads documents into FAISS when the app starts
 
-Registers the /chat route
+    Registers the /chat route
+    
 """
 
 from fastapi import FastAPI
@@ -13,6 +14,7 @@ from app.routes import chat_route, user_route, message_route
 from app.services.faiss_service import load_documents
 import asyncio
 from app.db.database import engine, Base
+from fastapi.openapi.docs import get_swagger_ui_html
 
 app = FastAPI(title="LLM Chat API")
 
@@ -47,6 +49,15 @@ async def on_startup():
 
 @app.on_event("startup")
 async def startup():
+    """
+        Asynchronously initializes the database by creating all tables defined in the SQLAlchemy Base metadata.
+        Establishes a connection using the provided engine and runs the table creation within a transaction context.
+        Usage:
+            Should be called at application startup to ensure all required tables exist.
+        Raises:
+            Any exceptions raised by the database engine during table creation.
+    """
+
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     print("✅ Tables created.")

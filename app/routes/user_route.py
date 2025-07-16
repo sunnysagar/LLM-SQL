@@ -1,3 +1,16 @@
+"""
+User API routes for CRUD operations and message retrieval.
+Endpoints:
+- POST /: Create a new user.
+- GET /{user_id}: Retrieve a user by ID.
+- GET /: Retrieve all users.
+- PUT /{user_id}: Update a user by ID.
+- DELETE /{user_id}: Delete a user by ID.
+- GET /{user_id}/messages: Retrieve messages for a user.
+Dependencies:
+- Uses FastAPI, SQLAlchemy AsyncSession, and custom CRUD/user/message schemas.
+"""
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
