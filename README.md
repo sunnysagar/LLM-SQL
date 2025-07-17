@@ -24,8 +24,8 @@ This project demonstrates two key tasks:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/sunnysagar/llm-sql.git
-cd llm-sql
+git clone https://github.com/sunnysagar/LLM-SQL.git
+cd LLM_SQL
 ```
 
 ### 2. Create virtual environment & activate
