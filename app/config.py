@@ -20,6 +20,6 @@ class Settings:
 
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     CLAUDE_API_KEY = os.getenv("CLAUDE_API_KEY")  # Optional
-    # GROK_API_KEY = os.getenv("GROK_API_KEY")      # Optional
+    GROK_API_KEY = os.getenv("GROK_API_KEY")      # Optional
 
 settings = Settings()
